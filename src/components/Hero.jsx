@@ -53,6 +53,7 @@ export default function Hero() {
           scale: 1,
           duration: 1.5,
           ease: "power1.inOut",
+          // onStart: () => nextVideoRef.current.play(),
         });
       }
     },
