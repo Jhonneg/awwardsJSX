@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import { TiLocationArrow } from "react-icons/ti";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { useEffect, useRef, useState } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,12 +12,18 @@ export default function Hero() {
   const [hasClicked, setHasClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
-  const totalVideos = 3;
+  const totalVideos = 4;
   const nextVideoRef = useRef(null);
 
   function handleVideoLoad() {
     setLoadedVideos((prev) => prev + 1);
   }
+
+  useEffect(() => {
+    if (loadedVideos === totalVideos - 1) {
+      setIsLoading(false);
+    }
+  }, [loadedVideos]);
 
   const upcomingVideoIndex = (currentIndex % totalVideos) + 1;
 
@@ -26,12 +32,6 @@ export default function Hero() {
 
     setCurrentIndex(upcomingVideoIndex);
   }
-
-  useEffect(() => {
-    if (loadedVideos === totalVideos - 1) {
-      setIsLoading(false);
-    }
-  }, [loadedVideos]);
 
   useGSAP(
     () => {
@@ -53,7 +53,6 @@ export default function Hero() {
           scale: 1,
           duration: 1.5,
           ease: "power1.inOut",
-          onStart: () => nextVideoRef.current.play(),
         });
       }
     },
@@ -80,7 +79,7 @@ export default function Hero() {
   });
 
   function getVideoSrc(index) {
-    return `videos/hero-${index}.mp4`;
+    return `awwardsJSX/videos/hero-${index}.mp4`;
   }
 
   return (
