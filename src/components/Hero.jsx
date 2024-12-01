@@ -53,7 +53,7 @@ export default function Hero() {
           scale: 1,
           duration: 1.5,
           ease: "power1.inOut",
-          // onStart: () => nextVideoRef.current.play(),
+          onStart: () => nextVideoRef.current.play(),
         });
       }
     },
@@ -80,7 +80,7 @@ export default function Hero() {
   });
 
   function getVideoSrc(index) {
-    return `awwardsJSX/videos/hero-${index}.mp4`;
+    return `videos/hero-${index}.mp4`;
   }
 
   return (
